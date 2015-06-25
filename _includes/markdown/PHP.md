@@ -52,7 +52,9 @@ Here are a few key points:
     In most cases it's quicker to filter out the posts you don't need in PHP instead of within the query. This also means it can take advantage of better caching. This won't work correctly (without additional tweaks) for pagination.
 
    Use :
-   ```php
+   
+    ```php
+    <?php
     $foo_query = new WP_Query( array(
         'post_type' => 'post',
         'posts_per_page' => 30 + count( $posts_to_exclude )
@@ -67,16 +69,20 @@ Here are a few key points:
             the_title();
         endwhile;
     endif;
+    ?>
     ```
     
     Instead of :
+    
     ```php
+    <?php
     $foo_query = new WP_Query( array(
         'post_type' => 'post',
         'posts_per_page' => 30,
         'post__not_in' => $posts_to_exclude
     ) );
-    ```	
+    ?>
+    ```
     
     See [WordPress VIP](https://vip.wordpress.com/documentation/performance-improvements-by-removing-usage-of-post__not_in/).
     
